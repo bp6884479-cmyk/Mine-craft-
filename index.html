@@ -1,60 +1,16 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Block World 3D</title>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<style>
-:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-html,body{margin:0;height:100%;background:#000;overflow:hidden;touch-action:none;font-family:system-ui,sans-serif;color:#fff;user-select:none;-webkit-user-select:none}
-#c{position:fixed;inset:0;width:100%;height:100%;filter:none}
-.o{position:fixed;inset:0;pointer-events:none}
-#vig,#grade,#tint{display:none}
-#vig{background:radial-gradient(ellipse at center,transparent 42%,rgba(3,5,18,.5) 80%,rgba(0,0,10,.8))}
-#tint{mix-blend-mode:soft-light}#uw{background:#1a5fc0;opacity:0}
-#cross{position:fixed;left:50%;top:50%;width:18px;height:18px;margin:-9px;pointer-events:none;background:linear-gradient(#fff,#fff) 50% 0/2px 6px no-repeat,linear-gradient(#fff,#fff) 50% 100%/2px 6px no-repeat,linear-gradient(#fff,#fff) 0 50%/6px 2px no-repeat,linear-gradient(#fff,#fff) 100% 50%/6px 2px no-repeat,radial-gradient(circle,#fff 0 1.5px,transparent 2px);filter:drop-shadow(0 0 2px #000)}
-#hot{position:fixed;bottom:6px;left:50%;transform:translateX(-50%);display:flex;gap:2px;margin-bottom:env(safe-area-inset-bottom,0px)}
-.s{box-sizing:border-box;width:44px;height:44px;border:2px solid #666;background:rgba(0,0,0,.55);position:relative;display:flex;align-items:center;justify-content:center;flex:none}
-.s.on{border-color:#fff;background:rgba(255,255,255,.25)}
-.s i,.r i{display:block;width:32px;height:32px;flex:none;background-image:var(--a);background-size:2560px 32px;image-rendering:pixelated}
-.s.en{box-shadow:inset 0 0 10px #c6f}.s.gc{cursor:pointer}
-.s.cc{width:68px;height:60px;flex-direction:column;cursor:pointer;gap:2px}.s.cc em{font-size:9px;font-style:normal;text-align:center;line-height:1}.s.cc:hover{border-color:#fc6}
-.s b{position:absolute;right:2px;bottom:0;font-size:12px;text-shadow:1px 1px #000}
-@media(max-width:480px){.s{width:36px;height:36px}}
-#st{position:fixed;top:8px;left:8px;font-size:15px;text-shadow:1px 1px #000;margin-top:env(safe-area-inset-top,0px)}
-#toast{position:fixed;top:14%;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);padding:6px 14px;border-radius:14px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
-#inv,#menu{position:fixed;inset:calc(var(--vh,1vh)*3) calc(var(--vw,1vw)*2);margin:auto;max-width:940px;background:rgba(32,26,20,.95);border:2px solid #7a6a50;border-radius:10px;padding:10px;overflow:auto;display:none;max-height:calc(var(--vh,1vh)*94);box-sizing:border-box;height:fit-content}
-#menu{display:block;text-align:center;max-width:460px;line-height:1.5}#menu h1{margin:4px}
-.cols{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
-.g{display:grid;grid-template-columns:repeat(9,44px);gap:2px;max-height:142px;overflow-y:auto}
-#pane{max-height:calc(var(--vh,1vh)*50);overflow-y:auto;min-width:270px;flex:1}
-.r{display:flex;align-items:center;gap:8px;padding:4px 6px;margin:2px 0;background:rgba(255,255,255,.08);border-radius:6px;cursor:pointer;font-size:13px}
-.r.no{opacity:.45}.r small{margin-left:auto;text-align:right}.y{color:#8f8;text-decoration:none}.n{color:#f88;text-decoration:none}
-button{background:#4a6b3a;color:#fff;border:0;border-radius:6px;padding:7px 11px;margin:2px;font-size:14px}
-#tabs button{background:#555}#tabs button.on{background:#c98a2a}
-.btn{position:fixed;width:58px;height:58px;border-radius:50%;background:linear-gradient(145deg,rgba(255,255,255,.24),rgba(18,20,28,.5));border:1px solid rgba(255,255,255,.35);box-shadow:0 4px 14px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.3);display:none;align-items:center;justify-content:center;font-size:26px}
-.tc .btn{display:flex}
-#go{position:fixed;inset:0;z-index:9;background:rgba(70,0,0,.85);display:none;flex-direction:column;align-items:center;justify-content:center}#go button{font-size:22px;padding:14px 34px;background:#b22}
-#login,#pm{position:fixed;inset:0;z-index:10;background:rgba(15,12,8,.96);display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center}#pm{background:rgba(0,0,0,.78)}#login input{font-size:20px;padding:10px;border-radius:8px;border:0;text-align:center}#pm button,#login button{font-size:20px;padding:12px 28px}#lv{display:none;position:fixed;right:76px;top:15px;z-index:5;width:44px;height:44px;padding:0;margin:0;border-radius:14px;border:1px solid rgba(245,217,138,.45);background:linear-gradient(145deg,rgba(60,48,24,.72),rgba(18,20,28,.72));box-shadow:0 4px 14px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.22);transition:transform .12s}#lv svg{display:block;margin:auto;width:22px;height:22px;stroke:#f5d98a;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}#lv:active{transform:scale(.92)}
-#menu{background:rgba(238,242,246,.96)!important;color:#222;max-width:340px!important;border:3px solid #fff;box-shadow:0 6px 30px #0008}#menu h1{margin:2px;color:#fff;font:900 34px/1 Impact,system-ui,sans-serif;-webkit-text-stroke:2px #3a2410;text-shadow:3px 3px #3a2410;letter-spacing:1px}.bn{display:inline-block;background:#d83a2e;color:#fff;font:900 17px system-ui;padding:3px 18px;border:3px solid #7a1c14;margin-bottom:6px;transform:skew(-4deg)}#menu>button{display:block;width:78%;margin:9px auto;padding:10px;font-size:19px;font-weight:700;background:linear-gradient(#72c13c,#4b9a22);border-bottom:4px solid #2f6f10;border-radius:3px;text-shadow:1px 1px #2a5a10}#optp button{font-size:13px;padding:6px 9px}
-#hot{background:rgba(18,22,28,.7);backdrop-filter:blur(6px);padding:3px;border-radius:11px;border:1px solid #fff3}.s{background:#252a30;border-color:#4a525c;border-radius:7px}.s.on{border-color:#7cc83a;background:#4a5a3a}#clk{position:fixed;left:8px;bottom:6px;font-weight:700;text-shadow:1px 1px #000;font-size:15px;pointer-events:none}
-#rot{display:none;position:fixed;inset:0;z-index:20;background:#0b1a2a;color:#fff;font-size:22px;text-align:center;align-items:center;justify-content:center;line-height:1.6}
-#login{background:radial-gradient(ellipse 70% 28% at 15% 100%,#2f8a45 98%,transparent),radial-gradient(ellipse 80% 34% at 85% 100%,#256f3b 98%,transparent),linear-gradient(180deg,#3d8fe8 0%,#9fd3ff 60%,#d4efff 100%);overflow:hidden}
-#login::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 45%,rgba(0,20,50,.5)),linear-gradient(180deg,rgba(60,150,255,.2),transparent 50%,rgba(20,150,70,.25));pointer-events:none}
-.lp{position:relative;z-index:1;background:rgba(238,242,246,.96);border:3px solid #fff;box-shadow:0 8px 34px #0007;padding:16px 22px;width:min(330px,78%);color:#222;border-radius:4px}.lp p{margin:6px 0;font-size:15px;line-height:1.3}.lp small{color:#666}
-.lt{color:#fff;font:900 34px/1 Impact,system-ui,sans-serif;-webkit-text-stroke:2px #3a2410;text-shadow:3px 3px #3a2410;letter-spacing:1px;margin:2px}
-#login #un{width:86%;padding:12px;border:3px solid #9bbf86;border-radius:4px;font:700 18px system-ui;background:#fff;color:#222;outline:0;margin:6px 0;text-align:center}
-#login .gb{display:block;width:86%;margin:8px auto;padding:10px;font-size:19px;font-weight:700;color:#fff;background:linear-gradient(#72c13c,#4b9a22);border:0;border-bottom:4px solid #2f6f10;border-radius:3px;text-shadow:1px 1px #2a5a10}#login .gb.gr{background:linear-gradient(#bbb,#999);border-bottom-color:#777;text-shadow:none}
-.cld{position:absolute;left:0;width:150px;height:42px;border-radius:50%;background:#fff;opacity:.85;filter:blur(5px);animation:dr 50s linear infinite}@keyframes dr{from{transform:translateX(-220px)}to{transform:translateX(110vw)}}
-#jb{position:fixed;width:120px;height:120px;margin:-60px;border:2px solid rgba(255,255,255,.22);background:rgba(255,255,255,.03);border-radius:50%;display:none;pointer-events:none}
-#jk{position:absolute;left:38px;top:38px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.32)}
-</style></head><body>
+<style>:root { box-sizing: border-box; }html, body { margin: 0; height: 100%; background: rgb(0, 0, 0); overflow: hidden; font-family: system-ui, sans-serif; color: rgb(255, 255, 255); }#c { position: fixed; inset: 0; width: 100%; height: 100%; filter: none; }.o { position: fixed; inset: 0; pointer-events: none; }#vig, #grade, #tint { display: none; }#vig {  }#tint {  }#uw { background: rgb(26, 95, 192); opacity: 0; }#cross { position: fixed; left: 50%; top: 50%; width: 18px; height: 18px; margin: -9px; pointer-events: none; }#hot { position: fixed; bottom: 6px; left: 50%; transform: translateX(-50%); display: flex; gap: 2px; }.s { box-sizing: border-box; width: 44px; height: 44px; border: 2px solid rgb(102, 102, 102); background: rgba(0, 0, 0, 0.55); position: relative; display: flex; align-items: center; justify-content: center; flex: 0 0 auto; }.s.on { border: rgb(255, 255, 255); background: rgba(255, 255, 255, 0.25); }.s i, .r i { display: block; width: 32px; height: 32px; flex: 0 0 auto; background-image: var(--a); background-size: 2560px 32px; }.s.en { box-shadow: inset 0 0 10px rgb(204, 102, 255); }.s.gc { cursor: pointer; }.s.cc { width: 68px; height: 60px; flex-direction: column; cursor: pointer; gap: 2px; }.s.cc em { font-size: 9px; font-style: normal; text-align: center; line-height: 1; }.s.cc:hover { border: rgb(255, 204, 102); }.s b { position: absolute; right: 2px; bottom: 0; font-size: 12px; }@media (max-width: 480px) { .s { width: 36px; height: 36px; } }#st { position: fixed; top: 8px; left: 8px; font-size: 15px; }#toast { position: fixed; top: 14%; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.6); padding: 6px 14px 6px 14px; border-radius: 14px; opacity: 0; transition: opacity 0.3s initial initial; pointer-events: none; white-space: nowrap; }#inv, #menu { position: fixed; inset: calc(var(--vh,1vh) * 3) calc(var(--vw,1vw) * 2); margin: auto; max-width: 940px; background: rgba(32, 26, 20, 0.95); border: 2px solid rgb(122, 106, 80); border-radius: 10px; padding: 10px; overflow: auto; display: none; max-height: calc(var(--vh,1vh) * 94); box-sizing: border-box; }#menu { display: block; text-align: center; max-width: 460px; line-height: 1.5; }#menu h1 { margin: 4px; }.cols { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }.g { display: grid; grid-template-columns: repeat(9, 44px); gap: 2px; max-height: 142px; overflow-y: auto; }#pane { max-height: calc(var(--vh,1vh) * 50); overflow-y: auto; min-width: 270px; flex: 1 0%; }.r { display: flex; align-items: center; gap: 8px; padding: 4px 6px 4px 6px; margin: 2px 0 2px 0; background: rgba(255, 255, 255, 0.08); border-radius: 6px; cursor: pointer; font-size: 13px; }.r.no { opacity: 0.45; }.r small { margin-left: auto; text-align: right; }.y { color: rgb(136, 255, 136); text-decoration: none; }.n { color: rgb(255, 136, 136); text-decoration: none; }button { background: rgb(74, 107, 58); color: rgb(255, 255, 255); border: 0; border-radius: 6px; padding: 7px 11px 7px 11px; margin: 2px; font-size: 14px; }#tabs button { background: rgb(85, 85, 85); }#tabs button.on { background: rgb(201, 138, 42); }.btn { position: fixed; width: 58px; height: 58px; border-radius: 50%; background: linear-gradient(145deg, rgba(255, 255, 255, 0.24), rgba(18, 20, 28, 0.5)); border: 1px solid rgba(255, 255, 255, 0.35); box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) , inset 0 1px 0 rgba(255, 255, 255, 0.3); display: none; align-items: center; justify-content: center; font-size: 26px; }.tc .btn { display: flex; }#go { position: fixed; inset: 0; z-index: 9; background: rgba(70, 0, 0, 0.85); display: none; flex-direction: column; align-items: center; justify-content: center; }#go button { font-size: 22px; padding: 14px 34px 14px 34px; background: rgb(187, 34, 34); }#login, #pm { position: fixed; inset: 0; z-index: 10; background: rgba(15, 12, 8, 0.96); display: none; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; }#pm { background: rgba(0, 0, 0, 0.78); }#login input { font-size: 20px; padding: 10px; border-radius: 8px; border: 0; text-align: center; }#pm button, #login button { font-size: 20px; padding: 12px 28px 12px 28px; }#lv { display: none; position: fixed; right: 76px; top: 15px; z-index: 5; width: 44px; height: 44px; padding: 0; margin: 0; border-radius: 14px; border: 1px solid rgba(245, 217, 138, 0.45); background: linear-gradient(145deg, rgba(60, 48, 24, 0.72), rgba(18, 20, 28, 0.72)); box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45) , inset 0 1px 0 rgba(255, 255, 255, 0.22); transition: transform 0.12s initial initial; }#lv svg { display: block; margin: auto; width: 22px; height: 22px; stroke: rgb(245, 217, 138); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }#lv:active { transform: scale(0.92); }#menu { background: rgba(238, 242, 246, 0.96) !important; color: rgb(34, 34, 34); max-width: 340px !important; border: 3px solid rgb(255, 255, 255); box-shadow: 0 6px 30px rgb(0, 0, 0); }#menu h1 { margin: 2px; color: rgb(255, 255, 255); font: 900 34px / 1 Impact, system-ui, sans-serif; letter-spacing: 1px; }.bn { display: inline-block; background: rgb(216, 58, 46); color: rgb(255, 255, 255); font: 900 17px system-ui; padding: 3px 18px 3px 18px; border: 3px solid rgb(122, 28, 20); margin-bottom: 6px; transform: skew(-4deg); }#menu > button { display: block; width: 78%; margin: 9px auto 9px auto; padding: 10px; font-size: 19px; font-weight: 700; background: linear-gradient(180deg, rgb(114, 193, 60), rgb(75, 154, 34)); border-bottom: 4px solid rgb(47, 111, 16); border-radius: 3px; }#optp button { font-size: 13px; padding: 6px 9px 6px 9px; }#hot { background: rgba(18, 22, 28, 0.7); padding: 3px; border-radius: 11px; border: 1px solid; }.s { background: rgb(37, 42, 48); border: rgb(74, 82, 92); border-radius: 7px; }.s.on { border: rgb(124, 200, 58); background: rgb(74, 90, 58); }#clk { position: fixed; left: 8px; bottom: 6px; font-weight: 700; font-size: 15px; pointer-events: none; }#rot { display: none; position: fixed; inset: 0; z-index: 20; background: rgb(11, 26, 42); color: rgb(255, 255, 255); font-size: 22px; text-align: center; align-items: center; justify-content: center; line-height: 1.6; }#login { overflow: hidden; }#login::after { content: ""; position: absolute; inset: 0; pointer-events: none; }.lp { position: relative; z-index: 1; background: rgba(238, 242, 246, 0.96); border: 3px solid rgb(255, 255, 255); box-shadow: 0 8px 34px rgb(0, 0, 0); padding: 16px 22px 16px 22px; width: min(calc(330px), calc(78%)); color: rgb(34, 34, 34); border-radius: 4px; }.lp p { margin: 6px 0 6px 0; font-size: 15px; line-height: 1.3; }.lp small { color: rgb(102, 102, 102); }.lt { color: rgb(255, 255, 255); font: 900 34px / 1 Impact, system-ui, sans-serif; letter-spacing: 1px; margin: 2px; }#login #un { width: 86%; padding: 12px; border: 3px solid rgb(155, 191, 134); border-radius: 4px; font: 700 18px system-ui; background: rgb(255, 255, 255); color: rgb(34, 34, 34); outline: 0; margin: 6px 0 6px 0; text-align: center; }#login .gb { display: block; width: 86%; margin: 8px auto 8px auto; padding: 10px; font-size: 19px; font-weight: 700; color: rgb(255, 255, 255); background: linear-gradient(180deg, rgb(114, 193, 60), rgb(75, 154, 34)); border-top: 0; border-right: 0; border-bottom: 4px solid rgb(47, 111, 16); border-left: 0; border-radius: 3px; }#login .gb.gr { background: linear-gradient(180deg, rgb(187, 187, 187), rgb(153, 153, 153)); border-bottom: rgb(119, 119, 119); text-shadow: none; }.cld { position: absolute; left: 0; width: 150px; height: 42px; border-radius: 50%; background: rgb(255, 255, 255); opacity: 0.85; }@keyframes dr{  }#jb { position: fixed; width: 120px; height: 120px; margin: -60px; border: 2px solid rgba(255, 255, 255, 0.22); background: rgba(255, 255, 255, 0.03); border-radius: 50%; display: none; pointer-events: none; }#jk { position: absolute; left: 38px; top: 38px; width: 44px; height: 44px; border-radius: 50%; background: rgba(255, 255, 255, 0.32); }</style></head><body>
 <canvas id="c"></canvas><div id="vig" class="o"></div><div id="grade" class="o"></div><div id="rot">📱↻<br>Phone ko rotate karo<br>(landscape / full screen)</div><div id="tint" class="o"></div><div id="uw" class="o"></div><div id="cross"></div>
 <div id="st"></div><div id="toast"></div><div id="hot"></div>
 <div id="jb"><div id="jk"></div></div>
-<div class="btn" id="bj" style="right:30px;bottom:90px;width:64px;height:64px">⬆</div><div class="btn" id="bi" style="right:22px;top:14px;width:46px;height:46px;font-size:20px;display:flex;background:linear-gradient(145deg,rgba(245,217,138,.45),rgba(60,48,24,.7));border-color:rgba(245,217,138,.55)">🎒</div>
-<div class="btn" id="bt" style="display:none;right:112px;bottom:100px;width:auto;height:46px;border-radius:23px;padding:0 18px;font-size:16px;font-weight:700;z-index:6;white-space:nowrap">🚆 Board</div><div class="btn" id="bg" style="display:none;right:24px;bottom:178px;width:72px;height:72px;font-size:13px;font-weight:700;flex-direction:column;z-index:6;background:linear-gradient(145deg,rgba(80,220,100,.55),rgba(18,40,24,.75))">▲<br>AAGE</div><div class="btn" id="bk" style="display:none;right:24px;bottom:96px;width:72px;height:72px;font-size:13px;font-weight:700;flex-direction:column;z-index:6;background:linear-gradient(145deg,rgba(240,90,80,.55),rgba(50,18,18,.75))">▼<br>BRAKE</div>
-<button id="xc" style="display:none;position:fixed;right:12px;top:10px;z-index:12;font-size:20px;background:#c22;padding:10px 16px">✕ Close</button><div id="inv"><div><b>🎒 Inventory</b> <span class="set"></span> <button id="x" style="float:right;background:#933">✕</button></div>
-<div class="cols"><div><div style="font-size:12px;opacity:.7">Backpack — scroll ↕</div><div id="bag" class="g"></div></div><div style="flex:1"><div id="tabs"></div><div id="pane"></div></div></div></div>
-<div id="login"><i class="cld" style="top:12%;animation-delay:-5s"></i><i class="cld" style="top:26%;animation-delay:-22s;width:200px"></i><i class="cld" style="top:6%;animation-delay:-34s;width:110px"></i><div class="lp"><div class="lt">BLOCK WORLD</div><div class="bn">3D ADVENTURE</div><p>Apna Player Name daalo<br><small>progress is device par save hogi</small></p><input id="un" maxlength="16" placeholder="Player name"><button id="li" class="gb">🔑 Login / Create</button><button id="gu" class="gb gr">Guest</button></div></div>
-<div id="pm"><h2>⏸ Game Menu</h2><button id="rsm">▶ Resume</button><button id="us" style="background:#2a7ab5">🧗 Unstuck</button><button id="sq">💾 Save &amp; Exit to Menu</button><button id="lo" style="background:#933">🚪 Logout</button></div><button id="lv" aria-label="Leave"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg></button><div id="clk"></div>
-<div id="hurt" class="o" style="background:#f00;opacity:0;transition:opacity .3s"></div><div id="go"><h1>💀 Game Over</h1><button id="rs">↻ Restart</button></div><div id="menu"><h1>BLOCK WORLD</h1><div class="bn">3D ADVENTURE</div><div id="wl" style="font-size:12px;color:#555;margin:2px"></div><button id="cn">Create New Game</button><button id="play">Load Game</button><button id="op" style="background:linear-gradient(#bbb,#999);border-bottom-color:#777">Options</button><div id="optp" style="display:none"><span class="set"></span></div><div id="ld" style="font-size:11px;color:#777"></div></div>
+<div class="btn" id="bj" style="right: 30px; bottom: 90px; width: 64px; height: 64px;">⬆</div><div class="btn" id="bi" style="right: 22px; top: 14px; width: 46px; height: 46px; font-size: 20px; display: flex; background: linear-gradient(145deg, rgba(245, 217, 138, 0.45), rgba(60, 48, 24, 0.7)); border: rgba(245, 217, 138, 0.55);">🎒</div>
+<div class="btn" id="bt" style="display: none; right: 112px; bottom: 100px; width: auto; height: 46px; border-radius: 23px; padding: 0 18px 0 18px; font-size: 16px; font-weight: 700; z-index: 6; white-space: nowrap;">🚆 Board</div><div class="btn" id="bg" style="display: none; right: 24px; bottom: 178px; width: 72px; height: 72px; font-size: 13px; font-weight: 700; flex-direction: column; z-index: 6; background: linear-gradient(145deg, rgba(80, 220, 100, 0.55), rgba(18, 40, 24, 0.75));">▲<br>AAGE</div><div class="btn" id="bk" style="display: none; right: 24px; bottom: 96px; width: 72px; height: 72px; font-size: 13px; font-weight: 700; flex-direction: column; z-index: 6; background: linear-gradient(145deg, rgba(240, 90, 80, 0.55), rgba(50, 18, 18, 0.75));">▼<br>BRAKE</div>
+<button id="xc" style="display: none; position: fixed; right: 12px; top: 10px; z-index: 12; font-size: 20px; background: rgb(204, 34, 34); padding: 10px 16px 10px 16px;">✕ Close</button><div id="inv"><div><b>🎒 Inventory</b> <span class="set"></span> <button id="x" style="float: right; background: rgb(153, 51, 51);">✕</button></div>
+<div class="cols"><div><div style="font-size: 12px; opacity: 0.7;">Backpack — scroll ↕</div><div id="bag" class="g"></div></div><div style="flex: 1 0%;"><div id="tabs"></div><div id="pane"></div></div></div></div>
+<div id="login"><i class="cld" style="top: 12%;"></i><i class="cld" style="top: 26%; width: 200px;"></i><i class="cld" style="top: 6%; width: 110px;"></i><div class="lp"><div class="lt">BLOCK WORLD</div><div class="bn">3D ADVENTURE</div><p>Apna Player Name daalo<br><small>progress is device par save hogi</small></p><input id="un" maxlength="16" placeholder="Player name"><button id="li" class="gb">🔑 Login / Create</button><button id="gu" class="gb gr">Guest</button></div></div>
+<div id="pm"><h2>⏸ Game Menu</h2><button id="rsm">▶ Resume</button><button id="us" style="background: rgb(42, 122, 181);">🧗 Unstuck</button><button id="sq">💾 Save &amp; Exit to Menu</button><button id="lo" style="background: rgb(153, 51, 51);">🚪 Logout</button></div><button id="lv" aria-label="Leave"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"></path></svg></button><div id="clk"></div>
+<div id="hurt" class="o" style="background: rgb(255, 0, 0); opacity: 0; transition: opacity 0.3s initial initial;"></div><div id="go"><h1>💀 Game Over</h1><button id="rs">↻ Restart</button></div><div id="menu"><h1>BLOCK WORLD</h1><div class="bn">3D ADVENTURE</div><div id="wl" style="font-size: 12px; color: rgb(85, 85, 85); margin: 2px;"></div><button id="cn">Create New Game</button><button id="play">Load Game</button><button id="op" style="background: linear-gradient(180deg, rgb(187, 187, 187), rgb(153, 153, 153)); border-bottom: rgb(119, 119, 119);">Options</button><div id="optp" style="display: none;"><span class="set"></span></div><div id="ld" style="font-size: 11px; color: rgb(119, 119, 119);"></div></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 'use strict';
@@ -272,7 +228,7 @@ const lamp=(x,z)=>{bx(x,Y+1,z,x,Y+3,z,19);p(x,Y+4,z,16);tr(x,Y+4,z)};
 lamp(3,-3);lamp(-3,3);lamp(14,2);lamp(-14,-2);lamp(2,14);lamp(-2,-14);
 const tx0=18,tz0=-13;bx(tx0-2,Y+1,tz0+1,tx0+4,Y+5,tz0+3,0);bx(tx0-2,Y,tz0+1,tx0+4,Y,tz0+3,10);for(const a of[tx0-2,tx0+4])for(const b of[tz0+1,tz0+3])bx(a,Y+1,b,a,Y+3,b,19);bx(tx0-2,Y+4,tz0+1,tx0+4,Y+4,tz0+3,7);bx(tx0-2,Y+4,tz0+2,tx0+4,Y+4,tz0+2,31);lamp(tx0-3,tz0+2);lamp(tx0+5,tz0+2)}
 function nodeOf(v){return[v.x+(v.c?20:18),v.z+(v.c?-20:-13)]}
-/* Rail tracks: route leaves village east side, runs through a cleared flat corridor (no trees/houses/hills) */
+/* Rail tracks */
 function rpath(A,T){const nA=nodeOf(A),nT=nodeOf(T),ex=A.x+(A.c?40:26),p=[[nA[0],nA[1]],[ex,nA[1]],[ex,nT[1]],[nT[0],nT[1]]],o=[];let s=0;
 for(let i=0;i<3;i++){const x0=p[i][0],z0=p[i][1],x1=p[i+1][0],z1=p[i+1][1],l=Math.abs(x1-x0)+Math.abs(z1-z0);if(l){o.push({x0,z0,x1,z1,s0:s,ya:A.y+1,yt:T.y+1});s+=l}}
 o.forEach(g=>g.tot=s);return o}
@@ -642,37 +598,25 @@ $('#cn').onclick=()=>{noSave=1;clearTimeout(svT);try{localStorage.removeItem(UK)
 $('#op').onclick=()=>{const p=$('#optp');p.style.display=p.style.display=='none'?'block':'none'};
 try{if(sessionStorage.getItem('auto')){sessionStorage.removeItem('auto');const u=localStorage.getItem('bw3d_user');if(u){boot(u);$('#play').click()}}}catch(e){}
 </script><script>
-/* ============================================================
-   BLOCK WORLD 3D — MINECRAFT-STYLE UPGRADE PATCH
-   Load AFTER your original <script> (see instructions).
-   Keeps every existing system; overrides: env (8-min cycle),
-   gen (tree variety), mobs (models + AI), mobHit, use.
-   ============================================================ */
+/* ===== MINECRAFT-STYLE UPGRADE PATCH ===== */
 (()=>{
 'use strict';
 const CFG={cycle:480,detect:1,maxArrows:20};
-const HS=new Set([2,8,9,10,11]);           // hostile types
+const HS=new Set([2,8,9,10,11]);
 let UID=1;
 const PI=Math.PI,ang=(dx,dz)=>Math.atan2(dx,dz);
-
-/* ---------------- 1. DAY / NIGHT: 8 minute cycle ---------------- */
 const _env=env;
-env=function(dt){
-  _env(dt*(360/CFG.cycle));               // original cycle = 360s -> 480s
-  sunM.lookAt(cam.position);moonM.lookAt(cam.position);
-};
+env=function(dt){_env(dt*(360/CFG.cycle));sunM.lookAt(cam.position);moonM.lookAt(cam.position)};
 sunM.geometry.dispose();sunM.geometry=new THREE.BoxGeometry(46,46,4);
 moonM.geometry.dispose();moonM.geometry=new THREE.BoxGeometry(32,32,4);
-
-/* ---------------- 2. TEXTURES / NEW BLOCKS / ITEMS ---------------- */
 T(0,[88,148,50],26,(x,y)=>{const r=H(x,y,9);return r>.88?[112,172,64,255]:r<.1?[68,120,40,255]:0});
 T(3,[125,125,125],30,(x,y)=>H(x>>1,y,3)>.8?[104,104,108,255]:(H(x,y>>1,33)>.86?[146,146,150,255]:0));
 T(4,[224,210,152],20,(x,y)=>H(x,y,4)>.9?[200,186,130,255]:0);
 T(7,[40,86,44],54,(x,y)=>H(x,y,7)>.86?Z:0);
-T(78,[24,64,48],56,(x,y)=>H(x,y,78)>.84?Z:0);            // pine needles
-T(79,[112,158,66],50,(x,y)=>H(x,y,79)>.85?Z:0);          // birch leaves
+T(78,[24,64,48],56,(x,y)=>H(x,y,78)>.84?Z:0);
+T(79,[112,158,66],50,(x,y)=>H(x,y,79)>.85?Z:0);
 I(16,(x,y)=>{if(y>=8&&y<=11&&x>=4&&x<=11&&!(y==8&&(x<6||x>9)))return((x==6&&y==9)||(x==9&&y==10)||(x==8&&y==8))?[245,245,240,255]:[205,40,40,255];if(y>=12&&y<=15&&x>=7&&x<=8)return[226,220,196,255];return 0});
-B[14].t=[3,3,15];                                        // frees tile 16 for the mushroom
+B[14].t=[3,3,15];
 D(75,'Pine Needles',[78],{hd:.15,occ:0});
 D(76,'Birch Leaves',[79],{hd:.15,occ:0});
 D(77,'Red Mushroom',[16],{hd:.05,occ:0,sol:0,box:1,sl:.7,cross:1,tr:1});
@@ -682,8 +626,6 @@ SM.push([123,124],[125,126]);
 CATS[1][1].push(75,76,77);CATS[5][1].push(123,124,125,126);
 tex.needsUpdate=true;
 document.documentElement.style.setProperty('--a','url('+A.toDataURL()+')');
-
-/* ---------------- 3. TREE VARIETY (pine, birch, big oak, bushes, mushrooms) ---------------- */
 const _gen=gen,PR=[0,1,1,2,1,2,3,2,3,3,3,3,3,3];
 gen=function(cx,cz){
   const d=_gen(cx,cz),vs=vnear(cx*16+8,cz*16+8,72);
@@ -699,25 +641,23 @@ gen=function(cx,cz){
     if(busy(x,y,z))continue;
     const cold=n2(wx*.0003+900,wz*.0003)>.5||n2(wx*.004+400,wz*.004)>.55,
           birch=n2(wx*.005+222,wz*.005+9)>.56,q=H(wx,wz,312),r2=H(wx,wz,314);
-    if(cold){                                           // PINE
+    if(cold){
       const t=8+(r2*6|0);for(let i=1;i<=t;i++)set(x,y+i,z,5);
       const top=y+t+1;
       for(let yy=y+3;yy<=top;yy++){const rr=PR[Math.min(top-yy,PR.length-1)];
         for(let a=-rr;a<=rr;a++)for(let b=-rr;b<=rr;b++){if(rr>1&&Math.abs(a)==rr&&Math.abs(b)==rr)continue;set(x+a,yy,z+b,75)}}
-    }else if(birch){                                    // BIRCH
+    }else if(birch){
       const t=5+(r2*3|0);for(let i=1;i<=t;i++)set(x,y+i,z,35);
       [[t-1,2],[t,2],[t+1,1],[t+2,1]].forEach(([h,rr])=>{for(let a=-rr;a<=rr;a++)for(let b=-rr;b<=rr;b++){if(rr==2&&Math.abs(a)==2&&Math.abs(b)==2&&H(wx+a,wz+b,315)>.4)continue;set(x+a,y+h,z+b,76)}});
-    }else if(q<.4){                                     // BIG OAK
+    }else if(q<.4){
       const t=8+(r2*5|0);for(let i=1;i<=t;i++)set(x,y+i,z,5);
       [[t-2,2],[t-1,3],[t,3],[t+1,2],[t+2,1]].forEach(([h,rr])=>{for(let a=-rr;a<=rr;a++)for(let b=-rr;b<=rr;b++){if(rr>=2&&Math.abs(a)==rr&&Math.abs(b)==rr&&H(wx+a,wz+b,316)>.5)continue;set(x+a,y+h,z+b,6)}});
-    }else if(q<.8){                                     // BUSH
+    }else if(q<.8){
       set(x,y+1,z,6);set(x+1,y+1,z,6);set(x-1,y+1,z,6);set(x,y+1,z+1,6);set(x,y+1,z-1,6);set(x,y+2,z,6);
-    }else set(x,y+1,z,77);                              // MUSHROOM
+    }else set(x,y+1,z,77);
   }
   return d;
 };
-
-/* ---------------- 4. PIXEL-TEXTURED MOB MODELS ---------------- */
 const MC=new Map(),GEO=new Map(),BAS=new Map();
 const sh=k=>{let s=0;for(let i=0;i<k.length;i++)s=(s*31+k.charCodeAt(i))|0;return Math.abs(s)%997};
 const px=(c,x,y,w,h,col)=>{c.fillStyle=col;c.fillRect(x,y,w,h)};
@@ -734,7 +674,6 @@ const m6=(s,t,f,b,bt)=>[s,s,t||s,bt||s,f||s,b||s];
 function geo(w,h,d,top){const k=w+','+h+','+d+','+top;let q=GEO.get(k);if(!q){q=new THREE.BoxGeometry(w,h,d);if(top)q.translate(0,-h/2,0);GEO.set(k,q)}return q}
 function pt(g,w,h,d,mt,x,y,z,top,cast){const m=new THREE.Mesh(geo(w,h,d,top),mt);m.position.set(x,y,z);if(cast)m.castShadow=true;g.add(m);return m}
 const ST={2:{hp:8,sp:2.3,det:20,dmg:3},8:{hp:6,sp:2.1,det:22,dmg:3},9:{hp:8,sp:2.5,det:14},10:{hp:7,sp:4.2,det:16,dmg:2},11:{hp:16,sp:5.2,det:30,dmg:5}};
-
 function B_zombie(){
   const g=new THREE.Group(),sk=[78,126,64];
   const hs=mtl('zs',sk),top=mtl('zt',[58,100,48]),
@@ -876,8 +815,6 @@ function mkModel(type,v){switch(type){
   case 10:return B_spider();case 11:return B_ender();case 3:return B_vill(v);
   default:{const o=_build(type);return{g:o.gr,legs:o.legs,hp:o.hp,H:type==7?.3:2.6,R:type==7?.3:.8,sp:o.sp,fol:o.fol,tail:o.tail}}}}
 build=function(type){const o=mkModel(type,0);return Object.assign(o,{gr:o.g})};
-
-/* ---------------- 5. SPAWNING HELPERS ---------------- */
 const ARR=[];
 function colTop(x,z,c){const a=Math.floor(x),b=Math.floor(z);for(let y=HT-2;y>0;y--){const id=get(a,y,b);if(id==11||id==6||id==75||id==76)return null;if(sol(a,y,b)){for(let k=1;k<=c;k++)if(sol(a,y+k,b))return null;return y+1}}return null}
 function caveY(x,z){const a=Math.floor(x),b=Math.floor(z),t0=th(a,b);for(let k=0;k<8;k++){const y=3+((Math.random()*Math.max(4,t0-6))|0);if(!get(a,y,b)&&!get(a,y+1,b)&&!get(a,y+2,b)&&sol(a,y-1,b)&&get(a,y-1,b)!=11)return y}return null}
@@ -900,8 +837,6 @@ function spawn(type,x,z,hm,yOver){
 mkMob=function(type,x,z){return spawn(type,x,z)};
 mkX=function(type,x,z,hm){return spawn(type,x,z,hm)};
 mkZ=function(x,z){return spawn(2,x,z)};
-
-/* ---------------- 6. MOVEMENT PRIMITIVES ---------------- */
 function gnd2(x,y,z,hh){const a=Math.floor(x),b=Math.floor(z),y0=Math.floor(y+.01);
   for(let yy=y0;yy>=y0-3;yy--){const id=get(a,yy,b);if(id==11)return null;if(sol(a,yy,b)){for(let k=1;k<=hh;k++)if(sol(a,yy+k,b))return null;return yy+1}}return null}
 function walk(m,tx,tz,sp,dt){
@@ -942,8 +877,6 @@ function drops(m){const r=Math.random;
     case 6:add(105,3);break;
     case 7:add(121,1);break}
   pick(m.x,m.y+.6,m.z);toast('Drop mila!');ui()}
-
-/* ---------------- 7. ARROWS ---------------- */
 const aM=[new THREE.MeshLambertMaterial({color:0x8a6030}),new THREE.MeshLambertMaterial({color:0x888890}),new THREE.MeshLambertMaterial({color:0xf0f0f0})];
 function shoot(m){
   if(ARR.length>=CFG.maxArrows)return;
@@ -960,8 +893,6 @@ function updArrows(dt){
         if(!dead&&Math.abs(a.x-P.x)<.5&&Math.abs(a.z-P.z)<.5&&a.y>P.y&&a.y<P.y+1.8){hurt(3);rm=true}}
       if(!a.stuck){a.g.position.set(a.x,a.y,a.z);a.g.lookAt(a.x+a.vx,a.y+a.vy,a.z+a.vz)}}
     if(rm){sc.remove(a.g);ARR.splice(i,1)}}}
-
-/* ---------------- 8. HOSTILE AI ---------------- */
 function zombie(m,dt,L,see){
   const s=ST[2];let tx=P.x,tz=P.z,TL=L,chase=see,tv=null;
   if(m.rt<=0){m.rt=.6;m.tv=null;let best=14;for(const v of mobs)if(v.type==3&&!v.in&&!v.dead){const d=Math.hypot(v.x-m.x,v.z-m.z);if(d<best){best=d;m.tv=v}}}
@@ -1030,8 +961,6 @@ function hostile(m,dt,L,i){
   if(!night&&(m.type==9||m.type==10||m.type==11)&&L>26&&!m.prov&&!m.agro&&Math.random()<dt*.03&&exposed(m)){kill(m,0);return}
   const see=L<s.det*CFG.detect&&Math.abs(P.y-m.y)<12;
   switch(m.type){case 2:zombie(m,dt,L,see);break;case 8:skeleton(m,dt,L,see);break;case 9:creeper(m,dt,L,see);break;case 10:spider(m,dt,L,see);break;case 11:ender(m,dt,L,see);break}}
-
-/* ---------------- 9. VILLAGERS ---------------- */
 const HOUSES=[[-10,-8,0],[10,-8,0],[-10,8,1],[10,8,1],[0,-18,0]];
 function villager(m,dt,L){
   m.rt-=dt;m.ct-=dt;m.talk=Math.max(0,(m.talk||0)-dt);
@@ -1046,7 +975,6 @@ function villager(m,dt,L){
   hd.rotation.x*=.9;
   if(m.ct<=0){m.ct=1.5+Math.random();for(const o of mobs)if(o!==m&&o.type==3&&!o.in&&!o.dead&&!o.chat&&Math.hypot(o.x-m.x,o.z-m.z)<2.6){if(Math.random()<.4){m.chat=o.chat=2.5+Math.random()*2;m.cp=o;o.cp=m}break}}
   if(m.talk>0){m.ta=ang(P.x-m.x,P.z-m.z);hd.rotation.x=Math.sin(performance.now()/160)*.15;return}
-  // wandering by profession
   m.idle=(m.idle||0)-dt;
   if(m.idle>0){if(m.pi==0)hd.rotation.x=.25+Math.sin(performance.now()/300+m.id)*.1;return}
   if(!m.tgt||Math.hypot(m.tgt[0]-m.x,m.tgt[1]-m.z)<1){
@@ -1066,8 +994,6 @@ function walkHome(m,dt,sp){
   m.ta=ang(tx-m.x,tz-m.z);
   if(!chaseTo(m,tx,tz,sp,dt)&&d>40){m.home=null;return 0}
   return 1}
-
-/* ---------------- 10. ANIMALS ---------------- */
 function dogFight(m,dt){
   m.dtm=(m.dtm||0)-dt;
   if(m.dtm<=0){m.dtm=.6;m.ft=null;let best=9;for(const h of mobs)if(HS.has(h.type)&&!h.dead){const d=Math.hypot(h.x-m.x,h.z-m.z);if(d<best&&Math.hypot(h.x-P.x,h.z-P.z)<16){best=d;m.ft=h}}}
@@ -1084,8 +1010,6 @@ function animal(m,dt,L){
   else{if(L<4&&Math.hypot(P.vx,P.vz)>3.6)m.pan=Math.max(m.pan,1.5)}
   if(m.pan>0){m.ta=ang(m.x-P.x,m.z-P.z);if(!walk(m,m.x+Math.sin(m.ta)*3,m.z+Math.cos(m.ta)*3,2.8*sp,dt))m.ta+=1.5;return}
   wander(m,dt,.9*sp)}
-
-/* ---------------- 11. ANIMATION ---------------- */
 function anim(m,dt){
   const t=performance.now()/1000,lg=m.legs,ty=m.type;
   m.amp+=((m.mvf?1:0)-m.amp)*Math.min(1,dt*10);const a=m.amp,ph=m.w;
@@ -1099,8 +1023,6 @@ function anim(m,dt){
     case 13:{const f=(m.pan>0?1:Math.min(1,a*1.3));m.wings[0].rotation.z=-(.12+Math.abs(Math.sin(t*14+m.id))*.9*f);m.wings[1].rotation.z=.12+Math.abs(Math.sin(t*14+m.id))*.9*f;break}
     case 4:if(m.tail)m.tail.rotation.z=Math.sin(t*9+m.id)*(m.fol&&m.mvf?.5:.15);break;
     case 5:if(m.tail)m.tail.rotation.z=Math.sin(t*3+m.id)*.2;break}}
-
-/* ---------------- 12. MAIN MOB LOOP + SPAWNING ---------------- */
 let spT=0,spA=0,spF=0;
 function spawnTick(dt){
   spT-=dt;spA-=dt;spF-=dt;
@@ -1118,7 +1040,6 @@ function spawnTick(dt){
   if(spA<=0){spA=2.5;
     if(nA<capA){const a=Math.random()*6.28,d=14+Math.random()*22,L=[0,1,12,13,0,1,12,13,14,4,5,6];spawn(L[Math.random()*L.length|0],P.x+Math.cos(a)*d,P.z+Math.sin(a)*d)}}
   if(spF<=0){spF=3;if(nF<8){const a=Math.random()*6.28,d=6+Math.random()*20;spawn(7,P.x+Math.cos(a)*d,P.z+Math.sin(a)*d)}}}
-
 updMobs=function(dt){
   topUp();trainUp();
   for(let i=PV.length-1;i>=0;i--){const q=PV[i];if(chunks.has((Math.floor(q.x)>>4)+','+(Math.floor(q.z)>>4))){spawn(3,q.x,q.z,q.h);PV.splice(i,1)}}
@@ -1144,9 +1065,7 @@ updMobs=function(dt){
     m.g.visible=!m.in&&D2<RV2;
     if(m.g.visible)anim(m,d);}
   updArrows(dt);spawnTick(dt)};
-
-/* ---------------- 13. COMBAT / INTERACTION ---------------- */
-const DV=new THREE.Vector3(),OV=new THREE.Vector3();
+const DV=new THREE.Vector3();
 function aimDir(){if(RS){cam.updateMatrixWorld();DV.set(RS[0],RS[1],.5).unproject(cam).sub(cam.position).normalize()}else cam.getWorldDirection(DV);return DV}
 function aimAt(m,reach){
   const d=aimDir(),o=cam.position;let best=1e9;
@@ -1176,12 +1095,106 @@ use=function(){
     for(const m of mobs)if(m.type==3&&!m.in&&!m.dead&&aimAt(m,4)>=0){
       const p=PROF[m.pi];m.talk=3;m.chat=0;toast(p.n+': '+p.say[Math.random()*p.say.length|0]);snd(190,.18,'triangle',.06);swing=1;return}}
   _use()};
-
-/* ---------------- 14. RESET ANY OLD-STYLE MOBS, THEN GO ---------------- */
 for(const m of mobs)sc.remove(m.g);mobs.length=0;
 if(booted)for(let i=0;i<14;i++)spawn([0,1,12,13,4,5,6,14][i%8],P.x+Math.random()*50-25,P.z+Math.random()*50-25);
 console.log('Block World upgrade loaded');
 })();
-
 </script>
+<script>
+/* ===== CAMERA SYSTEM: 1st / 3rd Back / 3rd Front ===== */
+(()=>{
+'use strict';
+const DEF={sens:1,fov:72,dist:4.5,height:.6,smooth:.5},NAMES=['First Person','Third Person · Back','Third Person · Front'],SHORT=['1P','3P-B','3P-F'];
+let cfg=Object.assign({},DEF),mode=0;
+try{const s=JSON.parse(localStorage.getItem('bw3d_cam')||'null');if(s){Object.assign(cfg,s.cfg||{});mode=(s.mode|0)%3}}catch(e){}
+const sv=()=>{try{localStorage.setItem('bw3d_cam',JSON.stringify({cfg,mode}))}catch(e){}};
+const PI=Math.PI,wrap=a=>((a+PI)%(2*PI)+2*PI)%(2*PI)-PI;
+const rc=(g,c,x,y,w,h)=>{g.fillStyle=c;g.fillRect(x,y,w,h)};
+function tx(base,fn,nz=10){const c=document.createElement('canvas');c.width=c.height=8;const g=c.getContext('2d');
+ for(let y=0;y<8;y++)for(let x=0;x<8;x++){const n=(H(x,y,base[0]+base[2])-.5)*nz;g.fillStyle='rgb('+base.map(v=>clamp(v+n,0,255)|0).join()+')';g.fillRect(x,y,1,1)}
+ if(fn)fn(g);const t=new THREE.CanvasTexture(c);t.magFilter=t.minFilter=THREE.NearestFilter;t.generateMipmaps=false;t.encoding=THREE.sRGBEncoding;return new THREE.MeshLambertMaterial({map:t})}
+const SK=[198,146,112],HR='#3e2a1a',
+ mSide=tx(SK,g=>rc(g,HR,0,0,8,3)),mBack=tx(SK,g=>rc(g,HR,0,0,8,6)),mTop=tx([62,42,26]),mBot=tx(SK),
+ mFace=tx(SK,g=>{rc(g,HR,0,0,8,2);rc(g,HR,0,2,1,1);rc(g,HR,7,2,1,1);rc(g,'#fff',1,4,2,1);rc(g,'#fff',5,4,2,1);rc(g,'#3a4aa8',2,4,1,1);rc(g,'#3a4aa8',5,4,1,1);rc(g,'#8a4a3a',3,6,2,1)}),
+ mShirt=tx([0,170,170],g=>rc(g,'#0e8a8a',0,7,8,1),14),mArm=tx(SK,g=>rc(g,'#00aaaa',0,0,8,3)),mLeg=tx([66,66,160],g=>rc(g,'#55555a',0,6,8,2),14);
+const box=(w,h,d,mat,x,y,z,off)=>{const g=new THREE.BoxGeometry(w,h,d);if(off)g.translate(0,off*h/2,0);const m=new THREE.Mesh(g,mat);m.position.set(x,y,z);m.castShadow=true;return m};
+const PM=new THREE.Group(),MM=new THREE.Group();MM.scale.setScalar(.92);PM.add(MM);
+const head=box(.5,.5,.5,[mSide,mSide,mTop,mBot,mFace,mBack],0,1.5,0,1),body=box(.5,.75,.25,mShirt,0,1.125,0,0),
+ armL=box(.25,.75,.25,mArm,-.375,1.5,0,-1),armR=box(.25,.75,.25,mArm,.375,1.5,0,-1),
+ legL=box(.25,.75,.25,mLeg,-.125,.75,0,-1),legR=box(.25,.75,.25,mLeg,.125,.75,0,-1);
+MM.add(head,body,armL,armR,legL,legR);PM.visible=false;sc.add(PM);
+let bY=0,ph=0,sp=0,px0=0,pz0=0,first=1;
+function animModel(dt){
+ if(first){bY=P.yaw;px0=P.x;pz0=P.z;first=0}
+ const mvd=Math.min(12,Math.hypot(P.x-px0,P.z-pz0)/Math.max(dt,.001));px0=P.x;pz0=P.z;
+ sp+=(mvd-sp)*Math.min(1,dt*10);const amp=clamp(sp/4,0,1.3);ph+=sp*dt*2.4;
+ let df=wrap(P.yaw-bY);if(sp>.6)bY+=df*Math.min(1,dt*10);else if(Math.abs(df)>1.1)bY+=df-Math.sign(df)*1.1;df=wrap(P.yaw-bY);
+ PM.position.set(P.x,P.y,P.z);PM.rotation.y=bY+PI;head.rotation.y=clamp(df,-1.1,1.1);head.rotation.x=clamp(-P.pit*.9,-1.2,1.2);
+ let lL,lR,aL,aR,az=0;
+ if(riding){lL=lR=-1.4;aL=aR=-1}
+ else if(!P.g){lL=.5;lR=-.3;aL=aR=-.8;az=.35}
+ else{const s=Math.sin(ph)*.9*amp;lL=s;lR=-s;aL=-s;aR=s}
+ aR-=swing*1.8;const k=Math.min(1,dt*18);
+ legL.rotation.x+=(lL-legL.rotation.x)*k;legR.rotation.x+=(lR-legR.rotation.x)*k;
+ armL.rotation.x+=(aL-armL.rotation.x)*k;armR.rotation.x+=(aR-armR.rotation.x)*k;
+ armL.rotation.z+=(-az-armL.rotation.z)*k;armR.rotation.z+=(az-armR.rotation.z)*k}
+const _r=R_.render.bind(R_),eye=new THREE.Vector3(),eyeQ=new THREE.Quaternion(),fromP=new THREE.Vector3(),fromQ=new THREE.Quaternion(),
+ dQ=new THREE.Quaternion(),ct=new THREE.Vector3(),want=new THREE.Vector3(),pos=new THREE.Vector3(),lastP=new THREE.Vector3(),lastQ=new THREE.Quaternion();
+let tr=1,effD=4.5,lastMode=mode,lastT=performance.now(),fc=0,crossHid=false;
+const btn=document.createElement('div');btn.className='btn';btn.id='bcam';
+btn.style.cssText='display:none;right:128px;top:12px;width:50px;height:50px;font-size:22px;flex-direction:column;gap:0;line-height:1;z-index:6;background:linear-gradient(145deg,rgba(120,180,255,.45),rgba(20,30,60,.7));border-color:rgba(160,200,255,.6)';
+btn.innerHTML='<span>📷</span><small id="cml" style="font-size:9px;font-weight:700">'+SHORT[mode]+'</small>';
+document.body.appendChild(btn);
+R_.render=function(s,c){
+ if(c!==cam||!started){PM.visible=false;return _r(s,c)}
+ const now=performance.now(),dt=Math.min(.1,(now-lastT)/1000);lastT=now;fc++;
+ if(cam.fov!==cfg.fov){cam.fov=cfg.fov;cam.updateProjectionMatrix()}
+ eye.copy(cam.position);eyeQ.copy(cam.quaternion);
+ if(mode!==lastMode){fromP.copy(lastP);fromQ.copy(lastQ);tr=0;lastMode=mode}
+ tr=Math.min(1,tr+dt/.28);
+ let dP=eye,dq=eyeQ;
+ if(mode>0){
+  const cp=Math.cos(P.pit),sg=mode===1?-1:1;
+  ct.set(P.x,P.y+1.45,P.z);
+  want.set(sg*-Math.sin(P.yaw)*cp*cfg.dist,sg*Math.sin(P.pit)*cfg.dist+cfg.height,sg*-Math.cos(P.yaw)*cp*cfg.dist);
+  const len=want.length()||1;want.multiplyScalar(1/len);
+  let a=len;const n=Math.ceil(len/.15);
+  for(let i=1;i<=n;i++){const f=i*len/n;if(sol(Math.floor(ct.x+want.x*f),Math.floor(ct.y+want.y*f),Math.floor(ct.z+want.z*f))){a=Math.max(.3,f-.3);break}}
+  if(a<effD)effD=a;else effD+=(a-effD)*Math.min(1,dt*(2+14*(1-cfg.smooth)));
+  pos.copy(ct).addScaledVector(want,effD);cam.position.copy(pos);cam.lookAt(ct);dQ.copy(cam.quaternion);dP=pos;dq=dQ}
+ if(tr<1){const e=tr*tr*(3-2*tr);cam.position.copy(fromP).lerp(dP,e);cam.quaternion.copy(fromQ).slerp(dq,e)}
+ else{cam.position.copy(dP);cam.quaternion.copy(dq)}
+ PM.visible=mode>0||tr<1;hand.visible=mode===0;if(PM.visible)animModel(dt);
+ const hc=mode===2;if(hc!==crossHid){crossHid=hc;$('#cross').style.display=hc?'none':''}
+ if(fc%6==0)btn.style.display=(started&&!paused&&!dead&&!invOpen)?'flex':'none';
+ _r(s,c);
+ lastP.copy(cam.position);lastQ.copy(cam.quaternion);cam.position.copy(eye);cam.quaternion.copy(eyeQ)};
+const _ph=physics;let lY=P.yaw,lP=P.pit;
+physics=function(dt){
+ if(mode>0)RS=null;
+ const dy=P.yaw-lY,dp=P.pit-lP;
+ if(cfg.sens!==1&&Math.abs(dy)<.8&&Math.abs(dp)<.8){P.yaw=lY+dy*cfg.sens;P.pit=clamp(lP+dp*cfg.sens,-1.55,1.55)}
+ _ph(dt);lY=P.yaw;lP=P.pit};
+const _u=use;use=function(){if(mode>0){const s=RS;RS=null;try{_u()}finally{RS=s}}else _u()};
+function cycle(){mode=(mode+1)%3;$('#cml').textContent=SHORT[mode];toast('📷 '+NAMES[mode]);sv()}
+btn.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();cycle()});
+addEventListener('keydown',e=>{if(e.code=='KeyV'&&started&&!invOpen&&!paused)cycle()});
+const SL=[['sens','Sensitivity',.3,2.5,.05],['fov','Field of View',50,110,1],['dist','Camera Distance',2,9,.5],['height','Camera Height',0,2.5,.1],['smooth','Smoothing',0,1,.05]];
+const pn=document.createElement('div');pn.id='camp';
+pn.style.cssText='display:none;position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:25;width:min(340px,88%);max-height:90%;overflow:auto;background:rgba(32,26,20,.93);border:2px solid #7a6a50;border-radius:10px;padding:12px;color:#fff;font:14px system-ui;box-sizing:border-box';
+pn.innerHTML='<b style="font-size:17px">📷 Camera Settings</b>'+SL.map(([k,n,a,b,s])=>`<div style="margin-top:8px">${n}: <b id="cv_${k}"></b><input type="range" data-k="${k}" min="${a}" max="${b}" step="${s}" style="width:100%;touch-action:none"></div>`).join('')+
+ '<div style="margin-top:10px"><button id="cm_mode">Switch View</button><button id="cm_rst" style="background:#7a4a2a">Reset</button><button id="cm_x" style="background:#933">Close</button></div>';
+document.body.appendChild(pn);
+['touchstart','touchmove','touchend','touchcancel'].forEach(t=>pn.addEventListener(t,e=>e.stopPropagation(),{passive:true}));
+function syncP(){pn.querySelectorAll('input').forEach(i=>{i.value=cfg[i.dataset.k];$('#cv_'+i.dataset.k).textContent=cfg[i.dataset.k]})}
+pn.addEventListener('input',e=>{const k=e.target.dataset.k;if(!k)return;cfg[k]=+e.target.value;$('#cv_'+k).textContent=cfg[k];sv()});
+$('#cm_mode').onclick=cycle;$('#cm_rst').onclick=()=>{Object.assign(cfg,DEF);syncP();sv()};$('#cm_x').onclick=()=>pn.style.display='none';
+const open=()=>{syncP();pn.style.display='block'};
+const b1=document.createElement('button');b1.textContent='📷 Camera Settings';b1.style.background='#7a4ab5';b1.onclick=open;$('#us').insertAdjacentElement('afterend',b1);
+const b2=document.createElement('button');b2.textContent='📷 Camera';b2.onclick=open;$('#optp').appendChild(b2);
+cam.fov=cfg.fov;cam.updateProjectionMatrix();
+console.log('Camera system loaded');
+})();
+</script>
+
 </body></html>
